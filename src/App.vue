@@ -1,4 +1,7 @@
-<script lang="ts">
+<script>
+import ButtonPrimary from "./components/Button/ButtonPrimary.vue";
+import InputWithLabel from "./components/Input/InputWithLabel.vue";
+
 export default {
   data() {
     return {
@@ -15,10 +18,12 @@ export default {
   },
   methods: {
     appendToDoList() {
+      console.log(this.inputValue);
       this.todos.push(this.inputValue);
       this.inputValue = "";
     },
   },
+  components: { ButtonPrimary, InputWithLabel },
 };
 </script>
 
@@ -31,12 +36,15 @@ export default {
     </section>
 
     <section>
-      <label
-        >{{ content.inputLabel }}
-        <input :placeholder="content.inputPlaceholder" v-model="inputValue" />
-      </label>
-
-      <button @click="appendToDoList">{{ content.buttonText }}</button>
+      <InputWithLabel
+        :placeholder="content.inputPlaceholder"
+        :label="content.inputLabel"
+        v-model:value="inputValue"
+      />
+      <ButtonPrimary
+        :content="content.buttonText"
+        :handleClick="appendToDoList"
+      />
     </section>
 
     <section>
