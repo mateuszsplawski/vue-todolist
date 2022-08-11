@@ -1,6 +1,6 @@
 <script>
-import ButtonPrimary from "./components/Button/ButtonPrimary.vue";
-import InputWithLabel from "./components/Input/InputWithLabel.vue";
+import ButtonPrimary from "./components/ButtonPrimary/ButtonPrimary.vue";
+import InputWithLabel from "./components/InputWithLabel/InputWithLabel.vue";
 
 export default {
   data() {
@@ -11,16 +11,20 @@ export default {
         inputPlaceholder: "e.g. Create Vue.js app",
         buttonText: "Add new Todo item",
         listHeader: "Todos:",
+        deleteButtonText: "Delete Todo item",
       },
       inputValue: "",
       todos: [],
     };
   },
   methods: {
-    appendToDoList() {
-      console.log(this.inputValue);
+    appendTodoList() {
       this.todos.push(this.inputValue);
       this.inputValue = "";
+    },
+    removeTodoFromList(todoKey) {
+      const newTodos = this.todos.filter((todo) => todo !== todoKey);
+      this.todos = newTodos;
     },
   },
   components: { ButtonPrimary, InputWithLabel },
@@ -43,7 +47,7 @@ export default {
       />
       <ButtonPrimary
         :content="content.buttonText"
-        :handleClick="appendToDoList"
+        :handleClick="appendTodoList"
       />
     </section>
 
@@ -54,7 +58,11 @@ export default {
 
       <ul>
         <li :key="todo" v-for="todo in todos">
-          {{ todo }}
+          <span>{{ todo }}</span>
+          <ButtonPrimary
+            :content="content.deleteButtonText"
+            :handleClick="() => removeTodoFromList(todo)"
+          />
         </li>
       </ul>
     </section>
