@@ -1,9 +1,9 @@
 <script lang="ts">
 export default {
-  props: ["content", "handleClick"],
+  props: ["content", "handleClick", "type"],
 };
 </script>
 
 <template>
-  <button @click="handleClick">{{ content }}</button>
+  <button :type="type = button" @click="handleClick">{{ content }}</button>
 </template>
