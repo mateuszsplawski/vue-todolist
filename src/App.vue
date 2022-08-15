@@ -43,7 +43,7 @@ export default {
     },
     changeTodoStatus(todo) {
       if(todo.status === "Pending"){
-        this.completedTodos = [...this.completedTodos, {...todo, status: "Completed"}]
+        this.completedTodos = [...this.completedTodos, {...todo, status: "Completed"}];
         this.pendingTodos = this.pendingTodos.filter(todo => todo === todo)
       } else {
         this.pendingTodos = [...this.pendingTodos, {...todo, status: "Pending"}]
